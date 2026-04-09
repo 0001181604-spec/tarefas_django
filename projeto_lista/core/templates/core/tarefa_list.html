@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Lista de Tarefas{% endblock %}
+
+{% block content %}
+    <h2>Lista de Tarefas</h2>
+
+    {% if tarefas %}
+        <ul>
+            {% for tarefa in tarefas %}
+                <li>
+                    <strong>{{ tarefa.titulo }}</strong>
+                    <p>{{ tarefa.descricao }}</p>
+                    <p>Status: {{ tarefa.get_status_display }}</p>
+                    {% if tarefa.prazo %}
+                        <p>Prazo: {{ tarefa.prazo }}</p>
+                    {% endif %}
+                    {% if tarefa.categoria %}
+                        <p>Categoria: {{ tarefa.categoria.nome }}</p>
+                    {% endif %}
+                    {% if tarefa.prioridade %}
+                        <p>Prioridade: {{ tarefa.prioridade.get_nivel_display }}</p>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Nenhuma tarefa encontrada.</p>
+    {% endif %}
+{% endblock %}

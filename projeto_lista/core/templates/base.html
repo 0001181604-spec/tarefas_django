@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Tarefas{% endblock %}</title>
+</head>
+<body>
+    <nav>
+        <a href="{% url 'tarefa-list' %}">Tarefas</a>
+        <a href="{% url 'logout' %}">Sair</a>
+    </nav>
+
+    {% for msg in messages %}
+        <p>{{ msg }}</p>
+    {% endfor %}
+
+    {% block content %}{% endblock %}
+</body>
+</html>
