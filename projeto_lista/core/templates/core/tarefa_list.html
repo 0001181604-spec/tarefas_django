@@ -1,30 +1,36 @@
 {% extends 'base.html' %}
 
-{% block title %}Lista de Tarefas{% endblock %}
+{% block title %}Tarefas{% endblock %}
 
 {% block content %}
-    <h2>Lista de Tarefas</h2>
+    <h2>Minhas Tarefas</h2>
+    <a href="{% url 'tarefa-create' %}">Nova Tarefa</a>
 
     {% if tarefas %}
-        <ul>
-            {% for tarefa in tarefas %}
-                <li>
-                    <strong>{{ tarefa.titulo }}</strong>
-                    <p>{{ tarefa.descricao }}</p>
-                    <p>Status: {{ tarefa.get_status_display }}</p>
-                    {% if tarefa.prazo %}
-                        <p>Prazo: {{ tarefa.prazo }}</p>
-                    {% endif %}
-                    {% if tarefa.categoria %}
-                        <p>Categoria: {{ tarefa.categoria.nome }}</p>
-                    {% endif %}
-                    {% if tarefa.prioridade %}
-                        <p>Prioridade: {{ tarefa.prioridade.get_nivel_display }}</p>
-                    {% endif %}
-                </li>
-            {% endfor %}
-        </ul>
+        <table>
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Status</th>
+                    <th>Prioridade</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for tarefa in tarefas %}
+                <tr>
+                    <td>{{ tarefa.titulo }}</td>
+                    <td>{{ tarefa.status }}</td>
+                    <td>{{ tarefa.prioridade }}</td>
+                    <td>
+                        <a href="{% url 'tarefa-edit' tarefa.pk %}">Editar</a>
+                        <a href="{% url 'tarefa-delete' tarefa.pk %}">Excluir</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     {% else %}
-        <p>Nenhuma tarefa encontrada.</p>
+        <p>Nenhuma tarefa cadastrada ainda.</p>
     {% endif %}
 {% endblock %}
