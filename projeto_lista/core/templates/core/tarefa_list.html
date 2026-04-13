@@ -8,19 +8,21 @@
 
     {% if tarefas %}
         <table>
-            <thead>
-                <tr>
-                    <th>Título</th>
-                    <th>Status</th>
-                    <th>Prioridade</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
+           <thead>
+    <tr>
+        <th>Título</th>
+        <th>Status</th>
+        <th>Categoria</th>
+        <th>Prioridade</th>
+        <th>Ações</th>
+    </tr>
+</thead>
             <tbody>
                 {% for tarefa in tarefas %}
                 <tr>
                     <td>{{ tarefa.titulo }}</td>
-                    <td>{{ tarefa.status }}</td>
+                    <td>{{ tarefa.get_status_display }}</td>
+                    <td>{{ tarefa.categoria }}</td>
                     <td>{{ tarefa.prioridade }}</td>
                     <td>
                         <a href="{% url 'tarefa-edit' tarefa.pk %}">Editar</a>
