@@ -55,5 +55,3 @@ python manage.py runserver
 - Interface web: http://127.0.0.1:8000
 - API REST: http://127.0.0.1:8000/api/
 - Admin: http://127.0.0.1:8000/admin/
-
-## Estrutura do projeto
