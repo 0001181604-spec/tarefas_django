@@ -1,14 +1,37 @@
 {% extends 'base.html' %}
 
-{% block title %}Tarefa{% endblock %}
+{% block title %}Tarefa | Detalhes{% endblock %}
 
 {% block content %}
-    <h2>Nova Tarefa</h2>
+<div style="max-width: 600px; margin: 0 auto;">
+    <h2 style="margin-bottom: 20px;">{% if form.instance.pk %}Editar{% else %}Nova{% endif %} Tarefa</h2>
+    
+    <div class="content-card">
+        <form method="POST">
+            {% csrf_token %}
+            <div class="spotify-form-style">
+                {{ form.as_p }}
+            </div>
+            
+            <div style="margin-top: 30px; display: flex; gap: 15px;">
+                <button type="submit" class="btn-spotify">Salvar Alterações</button>
+                <a href="{% url 'tarefa-list' %}" style="color: white; align-self: center; text-decoration: none; font-weight: 600;">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
 
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Salvar</button>
-        <a href="{% url 'tarefa-list' %}">Cancelar</a>
-    </form>
+<style>
+    /* Estilização rápida para os inputs do Django dentro do card */
+    .spotify-form-style p { margin-bottom: 15px; }
+    .spotify-form-style input, .spotify-form-style select, .spotify-form-style textarea {
+        width: 100%;
+        padding: 12px;
+        background: #333;
+        border: 1px solid transparent;
+        color: white;
+        border-radius: 4px;
+        margin-top: 5px;
+    }
+</style>
 {% endblock %}

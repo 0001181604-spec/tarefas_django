@@ -1,16 +1,33 @@
 {% extends 'base.html' %}
 
-{% block title %}Login{% endblock %}
+{% block title %}Login | Taskify{% endblock %}
 
-{% block content %}
-    <h2>Entrar no sistema</h2>
+{% block login_content %}
+<div class="login-container">
+    <div class="login-box">
+        <div style="margin-bottom: 30px;">
+            <h2 style="color: var(--spotify-green); font-size: 2.5rem;"><i class="fa-brands fa-spotify"></i></h2>
+            <h1 style="font-size: 1.8rem; margin: 10px 0;">Entrar no Taskify</h1>
+        </div>
 
-    <form method="POST">
-        {% csrf_token %}
-        <label>Usuário</label>
-        <input type="text" name="username">
-        <label>Senha</label>
-        <input type="password" name="password">
-        <button type="submit">Entrar</button>
-    </form>
+        <form method="POST">
+            {% csrf_token %}
+            <div style="text-align: left; margin-bottom: 15px;">
+                <label style="font-size: 14px; font-weight: 600;">Usuário</label>
+                <input type="text" name="username" placeholder="Nome de usuário" required>
+            </div>
+            <div style="text-align: left; margin-bottom: 25px;">
+                <label style="font-size: 14px; font-weight: 600;">Senha</label>
+                <input type="password" name="password" placeholder="Sua senha" required>
+            </div>
+            
+            <button type="submit" class="btn-spotify" style="width: 100%;">Entrar</button>
+        </form>
+
+        <hr style="margin: 30px 0; border: 0; border-top: 1px solid #333;">
+        <p style="color: var(--text-muted); font-size: 14px;">
+            Novo por aqui? <a href="#" style="color: white; font-weight: 600;">Criar uma conta</a>
+        </p>
+    </div>
+</div>
 {% endblock %}

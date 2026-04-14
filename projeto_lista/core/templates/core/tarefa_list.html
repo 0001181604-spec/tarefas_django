@@ -1,38 +1,61 @@
 {% extends 'base.html' %}
 
-{% block title %}Tarefas{% endblock %}
+{% block title %}Minhas Tarefas{% endblock %}
 
 {% block content %}
-    <h2>Minhas Tarefas</h2>
-    <a href="{% url 'tarefa-create' %}">Nova Tarefa</a>
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+    <h1><i class="fa-solid fa-list-check"></i> Minhas Tarefas</h1>
+    <a href="{% url 'tarefa-create' %}" class="btn-spotify" style="text-decoration: none;">
+        <i class="fa-solid fa-plus"></i> Nova Tarefa
+    </a>
+</div>
 
+<div class="content-card">
     {% if tarefas %}
         <table>
-           <thead>
-    <tr>
-        <th>Título</th>
-        <th>Status</th>
-        <th>Categoria</th>
-        <th>Prioridade</th>
-        <th>Ações</th>
-    </tr>
-</thead>
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Status</th>
+                    <th>Categoria</th>
+                    <th>Prioridade</th>
+                    <th style="text-align: right;">Ações</th>
+                </tr>
+            </thead>
             <tbody>
                 {% for tarefa in tarefas %}
                 <tr>
-                    <td>{{ tarefa.titulo }}</td>
-                    <td>{{ tarefa.get_status_display }}</td>
-                    <td>{{ tarefa.categoria }}</td>
-                    <td>{{ tarefa.prioridade }}</td>
+                    <td style="font-weight: 600;">{{ tarefa.titulo }}</td>
                     <td>
-                        <a href="{% url 'tarefa-edit' tarefa.pk %}">Editar</a>
-                        <a href="{% url 'tarefa-delete' tarefa.pk %}">Excluir</a>
+                        <span style="background: #333; padding: 4px 12px; border-radius: 12px; font-size: 12px;">
+                            {{ tarefa.get_status_display }}
+                        </span>
+                    </td>
+                    <td style="color: var(--text-muted);">{{ tarefa.categoria }}</td>
+                    <td>
+                        {% if tarefa.prioridade == 'Alta' %}
+                            <span style="color: #ff4444;">● Alta</span>
+                        {% else %}
+                            <span style="color: var(--spotify-green);">● Baixa</span>
+                        {% endif %}
+                    </td>
+                    <td style="text-align: right;">
+                        <a href="{% url 'tarefa-edit' tarefa.pk %}" style="color: var(--text-muted); margin-right: 15px;" title="Editar">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </a>
+                        <a href="{% url 'tarefa-delete' tarefa.pk %}" style="color: #ff4444;" title="Excluir">
+                            <i class="fa-solid fa-trash"></i>
+                        </a>
                     </td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
     {% else %}
-        <p>Nenhuma tarefa cadastrada ainda.</p>
+        <div style="text-align: center; padding: 40px; color: var(--text-muted);">
+            <i class="fa-solid fa-ghost" style="font-size: 3rem; margin-bottom: 20px;"></i>
+            <p>Nenhuma tarefa cadastrada ainda.</p>
+        </div>
     {% endif %}
+</div>
 {% endblock %}
