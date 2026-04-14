@@ -3,32 +3,51 @@
 {% block title %}Categorias{% endblock %}
 
 {% block content %}
-    <h2>Categorias</h2>
-    <a href="{% url 'categoria-create' %}">Nova Categoria</a>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; flex-wrap: wrap; gap: 20px;">
+        <div>
+            <h1 style="font-size: 2.2rem; font-weight: 500; letter-spacing: -0.03em;">Categorias</h1>
+            <p style="color: var(--text-dim); margin-top: 8px;">Gerencie suas tags e áreas de foco.</p>
+        </div>
+        
+        <a href="{% url 'categoria-create' %}" class="btn-iyo" style="width: auto; padding: 14px 28px; text-decoration: none; display: inline-flex; align-items: center; gap: 10px;">
+            <i class="fa-solid fa-plus"></i> Nova Categoria
+        </a>
+    </div>
 
     {% if categorias %}
-        <table>
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>Descrição</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for categoria in categorias %}
-                <tr>
-                    <td>{{ categoria.nome }}</td>
-                    <td>{{ categoria.descricao }}</td>
-                    <td>
-                        <a href="{% url 'categoria-edit' categoria.pk %}">Editar</a>
-                        <a href="{% url 'categoria-delete' categoria.pk %}">Excluir</a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--glass-border); border-radius: 24px; overflow: hidden; box-shadow: inset 0 0 20px rgba(255,255,255,0.01);">
+            <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                <thead>
+                    <tr style="border-bottom: 1px solid var(--glass-border); background: rgba(255, 255, 255, 0.03);">
+                        <th style="padding: 24px; color: var(--text-dim); font-weight: 500; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;">Nome</th>
+                        <th style="padding: 24px; color: var(--text-dim); font-weight: 500; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;">Descrição</th>
+                        <th style="padding: 24px; color: var(--text-dim); font-weight: 500; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; text-align: right;">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for categoria in categorias %}
+                    <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.03); transition: background 0.3s ease;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='transparent'">
+                        <td style="padding: 24px; font-weight: 500; font-size: 1.05rem;">{{ categoria.nome }}</td>
+                        <td style="padding: 24px; color: var(--text-dim);">{{ categoria.descricao }}</td>
+                        <td style="padding: 24px; text-align: right;">
+                            
+                            <a href="{% url 'categoria-edit' categoria.pk %}" style="color: var(--text-dim); text-decoration: none; margin-right: 20px; transition: color 0.2s;" title="Editar" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-dim)'">
+                                <i class="fa-solid fa-pen"></i>
+                            </a>
+                            <a href="{% url 'categoria-delete' categoria.pk %}" style="color: rgba(255, 74, 74, 0.7); text-decoration: none; transition: color 0.2s;" title="Excluir" onmouseover="this.style.color='#ff4a4a'" onmouseout="this.style.color='rgba(255, 74, 74, 0.7)'">
+                                <i class="fa-solid fa-trash"></i>
+                            </a>
+                            
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     {% else %}
-        <p>Nenhuma categoria cadastrada ainda.</p>
+        <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--glass-border); border-radius: 24px; padding: 60px 24px; text-align: center;">
+            <i class="fa-solid fa-shapes" style="font-size: 3rem; color: var(--text-dim); margin-bottom: 16px; opacity: 0.4;"></i>
+            <p style="color: var(--text-dim); font-size: 1.1rem;">Nenhuma categoria cadastrada ainda.</p>
+        </div>
     {% endif %}
 {% endblock %}
