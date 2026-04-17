@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Excluir Prioridade | Taskify{% endblock %}
+
+{% block content %}
+<div style="display: flex; justify-content: center; align-items: center; min-height: 70vh;">
+    
+    <div style="background: rgba(20, 20, 20, 0.6); backdrop-filter: blur(32px); -webkit-backdrop-filter: blur(32px); border: 1px solid rgba(255, 74, 74, 0.3); border-radius: 40px; padding: 48px; max-width: 440px; width: 100%; text-align: center; box-shadow: 0 20px 60px rgba(255, 74, 74, 0.1);">
+        
+        <div style="width: 80px; height: 80px; background: rgba(255, 74, 74, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px auto; box-shadow: 0 0 20px rgba(255, 74, 74, 0.2);">
+            <i class="fa-solid fa-triangle-exclamation" style="font-size: 2.2rem; color: #ff4a4a;"></i>
+        </div>
+        
+        <h2 style="font-size: 1.8rem; font-weight: 500; letter-spacing: -0.03em; margin-bottom: 12px; color: var(--text-main);">Excluir Prioridade</h2>
+        
+        <p style="color: var(--text-dim); font-size: 1rem; line-height: 1.5; margin-bottom: 40px;">
+           Tem certeza que deseja excluir o nível de prioridade <strong style="color: var(--text-main); font-weight: 500;">"{{ prioridade.nome }}"</strong>? Esta ação não pode ser desfeita.
+        </p>
+
+        <form method="POST">
+            {% csrf_token %}
+            
+            <button type="submit" style="width: 100%; padding: 18px; background: #ff4a4a; color: #ffffff; border: none; border-radius: 100px; font-weight: 500; font-size: 1rem; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(255, 74, 74, 0.2);" onmouseover="this.style.transform='scale(1.02)'; this.style.boxShadow='0 8px 25px rgba(255, 74, 74, 0.4)';" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 15px rgba(255, 74, 74, 0.2)';">
+                Sim, excluir permanentemente
+            </button>
+            
+            <div style="margin-top: 24px;">
+                <a href="{% url 'prioridade-list' %}" style="color: var(--text-dim); text-decoration: none; font-size: 0.95rem; font-weight: 400; transition: color 0.2s ease;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-dim)'">
+                    Mudei de ideia, cancelar
+                </a>
+            </div>
+        </form>
+
+    </div>
+</div>
+{% endblock %}

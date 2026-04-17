@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+{% block title %}{% if form.instance.pk %}Editar Tarefa{% else %}Nova Tarefa{% endif %} | Taskify{% endblock %}
+
+{% block content %}
+<style>
+    /* Estilizando a mágica do {{ form.as_p }} do Django para o estilo Iyo */
+    .glass-form p {
+        margin-bottom: 24px;
+        text-align: left;
+    }
+    .glass-form label {
+        display: block;
+        margin-bottom: 10px;
+        color: var(--text-dim);
+        font-size: 0.85rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+    /* Estilizando os inputs e selects gerados automaticamente pelo Django */
+    .glass-form input, .glass-form select, .glass-form textarea {
+        width: 100%;
+        padding: 16px 24px;
+        border-radius: 100px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.03);
+        color: var(--text-main);
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        box-sizing: border-box;
+    }
+    .glass-form input:focus, .glass-form select:focus, .glass-form textarea:focus {
+        outline: none;
+        border-color: rgba(255, 255, 255, 0.3);
+        background: rgba(255, 255, 255, 0.06);
+    }
+    /* Fundo escuro nas opções de seleção */
+    .glass-form select option {
+        background-color: #121212;
+        color: #ffffff;
+    }
+    .glass-form textarea {
+        border-radius: 24px !important; /* Textareas ficam melhores um pouco menos arredondados */
+        resize: vertical;
+        min-height: 120px;
+    }
+    .glass-form .helptext {
+        display: block;
+        margin-top: 8px;
+        font-size: 0.8rem;
+        color: var(--text-dim);
+    }
+    ul.errorlist {
+        color: #ff4a4a;
+        font-size: 0.85rem;
+        list-style: none;
+        margin-bottom: 10px;
+        padding: 0;
+        text-align: left;
+    }
+</style>
+
+<div style="display: flex; justify-content: center; align-items: center; min-height: 70vh;">
+    
+    <div style="background: rgba(20, 20, 20, 0.6); backdrop-filter: blur(32px); -webkit-backdrop-filter: blur(32px); border: 1px solid var(--glass-border); border-radius: 40px; padding: 48px; max-width: 600px; width: 100%; text-align: center; box-shadow: 0 32px 64px rgba(0,0,0,0.5);">
+        
+        <div style="width: 80px; height: 80px; background: rgba(255, 255, 255, 0.05); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px auto;">
+            <i class="fa-solid fa-list-check" style="font-size: 2.2rem; color: var(--text-main);"></i>
+        </div>
+        
+        <h2 style="font-size: 1.8rem; font-weight: 500; letter-spacing: -0.03em; margin-bottom: 12px; color: var(--text-main);">
+            {% if form.instance.pk %}Editar Tarefa{% else %}Nova Tarefa{% endif %}
+        </h2>
+        
+        <p style="color: var(--text-dim); font-size: 0.95rem; margin-bottom: 40px;">
+            Preencha os dados abaixo para organizar sua demanda.
+        </p>
+
+        <form method="POST" class="glass-form">
+            {% csrf_token %}
+            
+            {{ form.as_p }}
+            
+            <div style="margin-top: 40px;">
+                <button type="submit" class="btn-iyo" style="width: 100%; justify-content: center;">
+                    Salvar Tarefa
+                </button>
+            </div>
+            
+            <div style="margin-top: 24px;">
+                <a href="{% url 'tarefa-list' %}" style="color: var(--text-dim); text-decoration: none; font-size: 0.95rem; font-weight: 400; transition: color 0.2s ease;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='var(--text-dim)'">
+                    Cancelar e voltar
+                </a>
+            </div>
+        </form>
+
+    </div>
+</div>
+{% endblock %}

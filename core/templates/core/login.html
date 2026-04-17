@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Entrar | Taskify{% endblock %}
+
+{% block login_content %}
+    <div style="text-align: center; margin-bottom: 40px;">
+        <h2 style="font-size: 2rem; font-weight: 500; letter-spacing: -0.04em;">Bem-vindo de volta</h2>
+        <p style="color: var(--text-dim); margin-top: 8px; font-size: 0.95rem;">Faça login para continuar no Taskify.</p>
+    </div>
+
+    <form method="POST" style="text-align: left;">
+        {% csrf_token %}
+        
+        <div style="margin-bottom: 20px;">
+            <label style="display: block; margin-bottom: 10px; color: var(--text-dim); font-size: 0.85rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em;">Usuário</label>
+            <input type="text" name="username" placeholder="Seu nome de usuário" required>
+        </div>
+
+        <div style="margin-bottom: 32px;">
+            <label style="display: block; margin-bottom: 10px; color: var(--text-dim); font-size: 0.85rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em;">Senha</label>
+            <input type="password" name="password" placeholder="••••••••" required>
+        </div>
+
+        <button type="submit" class="btn-iyo">
+            Entrar no Sistema
+        </button>
+    </form>
+
+   
+{% endblock %}
